@@ -9,12 +9,12 @@ def hammingReciever(message):
     for par in parityNum:
         xor = 0
         for i in range(1, n + 1):
-            if i & par == par:
-                xor ^= int(message[-i])
+            if i & par != 0:
+                xor ^= int(message[i-1])
         if xor != 0:
             error += par
 
-    if error >= 0:
+    if error != 0:
         print("Error en el bit: ", error + 1)
         message[error - 1] = str(int(message[error - 1])^1)
         print("Mensaje corregido: ", "".join(message))
@@ -22,9 +22,9 @@ def hammingReciever(message):
         print("No se detectaron errores.")
 
     originalMessage = []
-    for i in range(n):
+    for i in range(1, n + 1):
         if i not in parityNum:
-            originalMessage.append(message[i])
+            originalMessage.append(message[i - 1])
     
     return "".join(originalMessage)
 
