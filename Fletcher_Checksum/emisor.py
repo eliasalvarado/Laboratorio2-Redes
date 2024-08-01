@@ -20,10 +20,11 @@ def stringToBinary(data):
     return ''.join(format(ord(i), '08b') for i in data)
 
 def ruido(message, probability):
+    message = list(message)
     for i in range(len(message)):
         if random.random() < probability:
-            message[i] ^= str(int(message[i]) ^ 1)
-    return message
+            message[i] = str(int(message[i]) ^ 1)
+    return ''.join(message)
 
 def enviarInformacion(ip, port, message):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -46,12 +47,12 @@ if __name__ == '__main__':
     port = 65432
 
     # Ruido
-    probability = float(input("Introduce la probabilidad de ruido en su mensaje (0-1): "))
-    if probability < 0 or probability > 1:
+    probability = float(input("Introduce la probabilidad p de ruido en su mensaje (1/p): "))
+    if probability <= 0:
         print("Probabilidad inválida")
         exit()
 
-    message = ruido(message, probability)
+    message = ruido(message,1/probability)
     print("Mensaje con ruido: ", message)
 
     # Capa transmisión
