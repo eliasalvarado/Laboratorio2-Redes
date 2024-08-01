@@ -36,7 +36,7 @@ if __name__ == '__main__':
     data = input("Introduce el mensaje: ")
     
     # Capa de presentación
-    data = stringToBinary(data + "\n\n")
+    data = stringToBinary(data + "\n")
     print("Mensaje en binario: ", data)
 
     # Capa de enlace
