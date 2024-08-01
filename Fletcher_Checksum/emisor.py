@@ -55,5 +55,5 @@ if __name__ == '__main__':
     print("Mensaje con ruido: ", message)
 
     # Capa transmisión
-    enviarInformacion(ip, port, message)
+    enviarInformacion(ip, port, message+"\n")
 
