@@ -147,8 +147,8 @@ func main() {
 	}
 	
 	// Capa 4 - Transmision
-
-	err := enviarMensajeHamming(host, port, noisyHamming)
+	
+	err := enviarMensajeHamming(host, port, noisyHamming+"\n")
 	if err != nil {
 		fmt.Printf("Error al enviar el mensaje: %v\n", err)
 	} else {
