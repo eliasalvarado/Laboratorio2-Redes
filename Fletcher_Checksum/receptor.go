@@ -12,8 +12,6 @@ func fletcher16(data []byte) (uint16, uint16) {
 	sum1 = 0
 	sum2 = 0
 
-	fmt.Println(data)
-
 	for _, b := range data {
 		sum1 = (sum1 + uint16(b)) % 255
 		sum2 = (sum2 + sum1) % 255
@@ -25,7 +23,7 @@ func fletcher16(data []byte) (uint16, uint16) {
 func verifyFletcher16Checksum(data []byte, checksum1, checksum2 uint16) bool {
 	sum1, sum2 := fletcher16(data)
 
-	fmt.Printf("cheksum1: %b checksum2: %b sum1: %b sum2: %b \n",checksum1,checksum2, sum1, sum2)
+	// fmt.Printf("cheksum1: %b checksum2: %b sum1: %b sum2: %b \n",checksum1,checksum2, sum1, sum2)
 	return sum1 == checksum1 && sum2 == checksum2
 }
 
@@ -73,7 +71,7 @@ func main() {
 		return
 	}
 
-	fmt.Println(bitsMessage,message)
+	// fmt.Println(bitsMessage,message)
 
 	checksum1, err := strconv.ParseUint(bitsChecksum[8:], 2, 8)
 	if err != nil {
@@ -89,7 +87,7 @@ func main() {
 	isValid := verifyFletcher16Checksum(message, uint16(checksum1), uint16(checksum2))
 
 	if isValid {
-		fmt.Printf("El mensaje fue aceptado: %s \n ", inputMessage)
+		fmt.Printf("El mensaje fue aceptado: %s \n ", bitsMessage)
 	} else {
 		fmt.Println("El mensaje contiene errores: Checksum inválido")
 	}
